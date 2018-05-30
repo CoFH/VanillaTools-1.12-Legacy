@@ -1,0 +1,14 @@
+{
+	"parent": "item/handheld_rod",
+	"textures": {
+		"layer0": "vanillatools:items/tool/fishing_rod_gold"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"cast": 1.0
+			},
+			"model": "vanillatools:item/tool/fishing_rod_gold_cast"
+		}
+	]
+}

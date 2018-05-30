@@ -1,0 +1,104 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "blocks/dirt"
+		},
+		"transform": "forge:default-tool"
+	},
+	"variants": {
+		"type": {
+			"shears_wood": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shears_wood"
+				}
+			},
+			"sickle_wood": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/sickle_wood"
+				}
+			},
+			"hammer_wood": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/hammer_wood"
+				}
+			},
+			"shears_stone": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shears_stone"
+				}
+			},
+			"sickle_stone": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/sickle_stone"
+				}
+			},
+			"hammer_stone": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/hammer_stone"
+				}
+			},
+			"shield_stone": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shield_stone"
+				}
+			},
+			"sickle_iron": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/sickle_iron"
+				}
+			},
+			"hammer_iron": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/hammer_iron"
+				}
+			},
+			"shield_iron": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shield_iron"
+				}
+			},
+			"shears_gold": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shears_gold"
+				}
+			},
+			"sickle_gold": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/sickle_gold"
+				}
+			},
+			"hammer_gold": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/hammer_gold"
+				}
+			},
+			"shield_gold": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shield_gold"
+				}
+			},
+			"shears_diamond": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shears_diamond"
+				}
+			},
+			"sickle_diamond": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/sickle_diamond"
+				}
+			},
+			"hammer_diamond": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/hammer_diamond"
+				}
+			},
+			"shield_diamond": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/shield_diamond"
+				}
+			}
+		}
+	}
+}

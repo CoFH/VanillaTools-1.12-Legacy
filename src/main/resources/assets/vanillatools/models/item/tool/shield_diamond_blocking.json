@@ -1,0 +1,6 @@
+{
+	"parent": "vanillatools:item/tool/shield_blocking",
+	"textures": {
+		"all": "vanillatools:items/tool/shield_diamond"
+	}
+}

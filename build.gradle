@@ -1,0 +1,188 @@
+import java.util.regex.Pattern
+
+buildscript {
+	repositories {
+		jcenter()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
+
+group = "cofh"
+archivesBaseName = "VanillaTools"
+
+targetCompatibility = "1.8"
+sourceCompatibility = "1.8"
+
+// Define properties file
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+	// Load config. It shall from now be referenced as simply config or project.config
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.config = new ConfigSlurper().parse prop
+}
+
+repositories {
+	maven {
+		name = "CoFH Maven"
+		url = "http://maven.covers1624.net"
+	}
+	maven {
+		name = "ChickenBones Maven"
+		url = "http://chickenbones.net/maven/"
+	}
+	maven {
+		name = "JEI Maven"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+}
+
+dependencies {
+	compile "cofh:CoFHCore:${config.mc_version}-${config.cofh_core_version}:deobf"
+}
+
+//Pull the mod version from code.
+project.config.mod_version = pullVersion()
+version = "${project.config.mod_version}." + (System.getenv("BUILD_NUMBER") ?: "1")
+println "Starting build of ${archivesBaseName}. Version: ${version}"
+println "Using Forge ${config.forge_version}, for Minecraft ${config.mc_version}"
+
+minecraft {
+	version = config.mc_version + "-" + config.forge_version
+	mappings = config.mappings
+	runDir = "run"
+	replace '${mod_version}', project.config.mod_version
+	makeObfSourceJar = false
+}
+
+processResources {
+	inputs.property "version", project.version
+	inputs.property "mc_version", project.config.mc_version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+		expand 'version': project.version, 'mc_version': project.config.mc_version
+	}
+	rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+version = "${project.minecraft.version}-${project.version}"
+
+jar {
+	classifier = 'universal'
+}
+
+task deobfJar(type: Jar) {
+	from sourceSets.main.output
+	classifier = 'deobf'
+}
+
+task srcJar(type: Jar) {
+	from sourceSets.main.allSource
+	classifier = 'sources'
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+	onlyIf {
+		//Skip of keystore is missing.
+		project.hasProperty('cofh_keyStore')
+	}
+
+	if (project.hasProperty('cofh_keyStore')) {
+		keyStore = project.cofh_keyStore
+		alias = project.cofh_keyStoreAlias
+		storePass = project.cofh_keyStorePass
+		keyPass = project.cofh_keyStorePass
+		inputFile = jar.archivePath
+		outputFile = jar.archivePath
+	}
+}
+
+build.dependsOn signJar
+
+artifacts {
+	archives deobfJar
+	archives srcJar
+}
+
+def pullVersion() {
+	def file = file("src/main/java/cofh/vanillatools/VanillaTools.java")
+	def version = ""
+	def pattern = Pattern.compile("^\tpublic static final String VERSION = \"([\\d\\.]*)\";\$")
+	file.eachLine { String s ->
+		def matcher = pattern.matcher(s)
+		if (matcher.matches()) {
+			version = matcher.group(1)
+			return
+		}
+	}
+	return version
+}
+
+// Configure upload task.
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			if (project.hasProperty("local_maven") || project.hasProperty("maven_pass")) {
+				if (project.hasProperty("maven_pass")) {
+					println "Uploading to remote maven."
+					repository(url: "http://maven_upload.covers1624.net/") {
+						authentication(userName: "cofh", password: project.getProperty("maven_pass"))
+					}
+				} else {
+					println "Uploading to local maven."
+					repository(url: "file://${local_maven}")
+				}
+				pom {
+					groupId = project.group
+					// Force Maven upload to use the <mcversion>-<version> syntax.
+					artifactId = project.archivesBaseName
+					project {
+						name project.archivesBaseName
+						packaging 'jar'
+						description 'VanillaTools'
+						url 'https://github.com/CoFH/VanillaTools'
+
+						scm {
+							url 'https://github.com/CoFH/VanillaTools'
+							connection 'scm:git:git://github.com/CoFH/VanillaTools.git'
+							developerConnection 'scm:git:git@github.com:CoFH/VanillaTools.git'
+						}
+
+						issueManagement {
+							system 'github'
+							url 'https://github.com/CoFH/Feedback/issues'
+						}
+
+						licenses {
+							license {
+								name "CoFH Don't Be a Jerk License"
+								url 'https://github.com/CoFH/VanillaTools/blob/master/README.md'
+								distribution 'repo'
+							}
+						}
+
+						developers {
+							developer {
+								id 'TeamCoFH'
+								name 'TeamCoFH'
+								roles { role 'developer' }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

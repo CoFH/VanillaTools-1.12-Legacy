@@ -1,0 +1,6 @@
+{
+	"parent": "vanillatools:item/tool/bow_diamond",
+	"textures": {
+		"layer0": "vanillatools:items/tool/bow_diamond_0"
+	}
+}

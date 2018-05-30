@@ -1,0 +1,6 @@
+{
+	"parent": "vanillatools:item/tool/bow_gold",
+	"textures": {
+		"layer0": "vanillatools:items/tool/bow_gold_1"
+	}
+}

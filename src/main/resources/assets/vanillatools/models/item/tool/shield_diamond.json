@@ -1,0 +1,13 @@
+{
+	"parent": "vanillatools:item/tool/shield",
+	"textures": {
+		"all": "vanillatools:items/tool/shield_diamond"
+	},
+
+	"overrides": [{
+		"predicate": {
+			"blocking": 1
+		},
+		"model": "vanillatools:item/tool/shield_diamond_blocking"
+	}]
+}

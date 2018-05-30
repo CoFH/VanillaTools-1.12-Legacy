@@ -1,0 +1,6 @@
+{
+	"parent": "vanillatools:item/tool/fishing_rod_stone",
+	"textures": {
+		"layer0": "vanillatools:items/tool/fishing_rod_stone_cast"
+	}
+}

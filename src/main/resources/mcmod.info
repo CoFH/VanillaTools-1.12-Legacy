@@ -1,0 +1,19 @@
+[
+	{
+		"modid": "vanillatools",
+		"name": "CoFH: Vanilla+ Tools",
+		"description": "A Vanilla Enhancement mod which adds more tool types in various vanilla materials.",
+		"version": "${version}",
+		"credits": "Team CoFH",
+		"logoFile": "assets/vanillatools/textures/logo.png",
+		"mcversion": "${mc_version}",
+		"url": "http://www.teamcofh.com",
+		"updateUrl": "",
+		"authorList": [ "Team CoFH" ],
+		"parent": "",
+		"screenshots": [],
+		"dependencies": [
+			"forge,cofhcore"
+		]
+	}
+]
