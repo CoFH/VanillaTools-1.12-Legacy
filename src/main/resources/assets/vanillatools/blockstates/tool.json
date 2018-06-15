@@ -24,6 +24,11 @@
 					"layer0": "vanillatools:items/tool/hammer_wood"
 				}
 			},
+			"excavator_wood": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/excavator_wood"
+				}
+			},
 			"shears_stone": {
 				"textures": {
 					"layer0": "vanillatools:items/tool/shears_stone"
@@ -39,6 +44,11 @@
 					"layer0": "vanillatools:items/tool/hammer_stone"
 				}
 			},
+			"excavator_stone": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/excavator_stone"
+				}
+			},
 			"shield_stone": {
 				"textures": {
 					"layer0": "vanillatools:items/tool/shield_stone"
@@ -52,6 +62,11 @@
 			"hammer_iron": {
 				"textures": {
 					"layer0": "vanillatools:items/tool/hammer_iron"
+				}
+			},
+			"excavator_iron": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/excavator_iron"
 				}
 			},
 			"shield_iron": {
@@ -74,6 +89,11 @@
 					"layer0": "vanillatools:items/tool/hammer_gold"
 				}
 			},
+			"excavator_gold": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/excavator_gold"
+				}
+			},
 			"shield_gold": {
 				"textures": {
 					"layer0": "vanillatools:items/tool/shield_gold"
@@ -92,6 +112,11 @@
 			"hammer_diamond": {
 				"textures": {
 					"layer0": "vanillatools:items/tool/hammer_diamond"
+				}
+			},
+			"excavator_diamond": {
+				"textures": {
+					"layer0": "vanillatools:items/tool/excavator_diamond"
 				}
 			},
 			"shield_diamond": {

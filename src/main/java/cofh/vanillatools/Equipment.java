@@ -62,6 +62,7 @@ public class Equipment {
 				itemShears = new ItemShearsCore(material);
     			itemSickle = new ItemSickleCore(material);
     			itemHammer = new ItemHammerCore(material);
+    			itemExcavator = new ItemExcavatorCore(material);
     			itemShield = Items.SHIELD;
     		}
     	},
@@ -76,6 +77,7 @@ public class Equipment {
 				itemShears = Items.SHEARS;
     			itemSickle = new ItemSickleCore(material);
 				itemHammer = new ItemHammerCore(material);
+			    itemExcavator = new ItemExcavatorCore(material);
 				itemShield = new ItemShieldCore(material);
 
     		}
@@ -89,13 +91,13 @@ public class Equipment {
 		public final ToolMaterial material;
 
 		/* BOW */
-		private float arrowSpeed = 0.0F;
-		private float arrowDamage = 0.0F;
+		private float arrowSpeed;
+		private float arrowDamage;
 		private float zoomMultiplier = 0.15F;
 
 		/* FISHING ROD */
-		private int luckModifier = 0;
-		private int speedModifier = 0;
+		private int luckModifier;
+		private int speedModifier;
 
 		/* TOOLS */
 		public ItemBow itemBow;
@@ -103,6 +105,7 @@ public class Equipment {
 		public ItemShears itemShears;
 		public ItemSickleCore itemSickle;
 		public ItemHammerCore itemHammer;
+		public ItemExcavatorCore itemExcavator;
 		public Item itemShield;
 
 		public ItemStack toolBow;
@@ -110,9 +113,10 @@ public class Equipment {
 		public ItemStack toolShears;
 		public ItemStack toolSickle;
 		public ItemStack toolHammer;
+		public ItemStack toolExcavator;
 		public ItemStack toolShield;
 
-		public boolean[] enable = new boolean[6];
+		public boolean[] enable = new boolean[7];
 
 		ToolSetVanilla(String name, ToolMaterial materialIn, String ingot) {
 
@@ -137,6 +141,7 @@ public class Equipment {
 			itemShears = new ItemShearsCore(material);
 			itemSickle = new ItemSickleCore(material);
 			itemHammer = new ItemHammerCore(material);
+			itemExcavator = new ItemExcavatorCore(material);
 			itemShield = new ItemShieldCore(material);
 		}
 
@@ -160,9 +165,10 @@ public class Equipment {
 			}
 			enable[3] = VanillaTools.CONFIG.getConfiguration().get(category, "Sickle", enableDefault(this)).getBoolean(enableDefault(this));
 			enable[4] = VanillaTools.CONFIG.getConfiguration().get(category, "Hammer", enableDefault(this)).getBoolean(enableDefault(this));
+			enable[5] = VanillaTools.CONFIG.getConfiguration().get(category, "Excavator", enableDefault(this)).getBoolean(enableDefault(this));
 
 			if (this != WOOD) {
-				enable[5] = VanillaTools.CONFIG.getConfiguration().get(category, "Shield", enableDefault(this)).getBoolean(enableDefault(this));
+				enable[6] = VanillaTools.CONFIG.getConfiguration().get(category, "Shield", enableDefault(this)).getBoolean(enableDefault(this));
 			}
 			create();
 
@@ -207,10 +213,16 @@ public class Equipment {
 			itemHammer.setRegistryName("tool.hammer_" + name);
 			ForgeRegistries.ITEMS.register(itemHammer);
 
+			/* EXCAVATOR */
+			itemExcavator.setRepairIngot(ingot).setUnlocalizedName(TOOL + "Excavator").setCreativeTab(CreativeTabs.TOOLS);
+			itemExcavator.setShowInCreative(enable[5]);
+			itemExcavator.setRegistryName("tool.excavator_" + name);
+			ForgeRegistries.ITEMS.register(itemExcavator);
+
 			/* SHIELD */
 			if (itemShield instanceof ItemShieldCore) {
 				((ItemShieldCore) itemShield).setRepairIngot(ingot).setUnlocalizedName(TOOL + "Shield").setCreativeTab(CreativeTabs.COMBAT);
-				((ItemShieldCore) itemShield).setShowInCreative(enable[5]);
+				((ItemShieldCore) itemShield).setShowInCreative(enable[6]);
 				itemShield.setRegistryName("tool.shield_" + name);
 				ForgeRegistries.ITEMS.register(itemShield);
 			}
@@ -220,6 +232,7 @@ public class Equipment {
 			toolShears = new ItemStack(itemShears);
 			toolSickle = new ItemStack(itemSickle);
 			toolHammer = new ItemStack(itemHammer);
+			toolExcavator = new ItemStack(itemExcavator);
 			toolShield = new ItemStack(itemShield);
 		}
 
@@ -241,6 +254,9 @@ public class Equipment {
 				addShapedRecipe(toolHammer, "III", "ISI", " S ", 'I', ingot, 'S', "stickWood");
 			}
 			if (enable[5]) {
+				addShapedRecipe(toolExcavator, " I ", "ISI", " S ", 'I', ingot, 'S', "stickWood");
+			}
+			if (enable[6]) {
 				addShapedRecipe(toolShield, "III", "ISI", " I ", 'I', ingot, 'S', Items.SHIELD);
 			}
 		}
@@ -274,6 +290,7 @@ public class Equipment {
 			}
 			registerModel(itemSickle, "sickle_" + name);
 			registerModel(itemHammer, "hammer_" + name);
+			registerModel(itemExcavator, "excavator_" + name);
 
 			if (itemShield instanceof ItemShieldCore) {
 				registerModelOverride(itemShield, "shield_" + name);
