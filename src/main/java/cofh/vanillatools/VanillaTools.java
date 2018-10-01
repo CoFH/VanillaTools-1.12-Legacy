@@ -25,8 +25,8 @@ public class VanillaTools {
 	public static final String MOD_ID = "vanillatools";
 	public static final String MOD_NAME = "CoFH: Vanilla+ Tools";
 
-	public static final String VERSION = "1.0.0";
-	public static final String VERSION_MAX = "1.1.0";
+	public static final String VERSION = "1.1.0";
+	public static final String VERSION_MAX = "1.2.0";
 	public static final String VERSION_GROUP = "required-after:" + MOD_ID + "@[" + VERSION + "," + VERSION_MAX + ");";
 	public static final String UPDATE_URL = "https://raw.github.com/cofh/version/master/" + MOD_ID + "_update.json";
 
